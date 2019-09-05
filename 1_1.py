@@ -14,15 +14,12 @@ def is_unique(s):
     if len(s) <= 1:
         return True
 
-    window_pos = 0
-    while (window_pos < len(s)):
-        for i, c in enumerate(s):
-            print(i, c)
-            if i == window_pos:
-                continue
-            if c == s[window_pos]:
-                return False
-        window_pos += 1
+    exists = {}
+    for c in s:
+        if exists.get(c):
+            return False
+        else:
+            exists[c] = True
     return True
 
 
