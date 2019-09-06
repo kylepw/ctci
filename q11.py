@@ -1,5 +1,5 @@
 """
-    1_1.py
+    q11.py
     ~~~~~~
 
     Implement an algorithm to determine if a string has all unique characters.

@@ -19,7 +19,7 @@ def urlify(s, length):
 
     chars = string.split()
 
-    replaced = ['%20' for c in chars if c == ' ' else c]
+    replaced = ['%20' if c == ' ' else c for c in chars]
     print(replaced)
 
 
