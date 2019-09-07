@@ -29,8 +29,7 @@ def one_replace(orig, edit):
 
 def one_edit(smaller, larger):
     difference = False
-    s_index = 0
-    l_index = 0
+    s_index, l_index = 0, 0
     while s_index < len(smaller):
         if smaller[s_index] != larger[l_index]:
             if difference:
