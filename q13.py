@@ -14,8 +14,18 @@
 """
 import unittest
 
+
 def urlify(s, length):
-    pass
+    new_index = len(s)
+    mutable = list(s)
+    for i in reversed(range(length)):
+        if mutable[i] == ' ':
+            mutable[new_index - 3:new_index] = '%20'
+            new_index -= 3
+        else:
+            mutable[new_index - 1] = mutable[i]
+            new_index -= 1
+    return ''.join(mutable)
 
 
 def urlify_simple(s, length):
