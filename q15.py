@@ -18,33 +18,38 @@ ple, pale
 import unittest
 
 
+def one_replace(orig, edit):
+    edited = False
+    for c1, c2 in zip(orig, edit):
+        if c1 != c2:
+            if edited:
+                return False
+            edited = True
+    return True
+
+def one_edit(smaller, larger):
+    difference = False
+    s_index = 0
+    l_index = 0
+    while s_index < len(smaller):
+        if smaller[s_index] != larger[l_index]:
+            if difference:
+                return False
+            s_index -= 1
+            difference = True
+        s_index += 1
+        l_index += 1
+    return True
+
 def one_away(orig, edit):
     if orig == edit:
         return True
-    if (len(edit) == len(orig)) or (len(edit) == len(orig) + 1) or (len(edit) == len(orig) - 1):
-        if len(orig) == len(edit):
-            edited = False
-            for c1, c2 in zip(orig, edit):
-                if c1 != c2:
-                    if edited:
-                        return False
-                    edited = True
-        else:
-            diff_counter = 0
-            larger = orig if len(orig) > len(edit) else edit
-            smaller = orig if len(orig) < len(edit) else edit
-            print(smaller, larger)
-            s_index = 0
-            l_index = 0
-            while s_index < len(smaller):
-                if smaller[s_index] != larger[l_index]:
-                    s_index -= 1
-                    diff_counter += 1
-                    if diff_counter > 1:
-                        return False
-                s_index += 1
-                l_index += 1
-        return True
+    if len(orig) == len(edit):
+        return one_replace(orig, edit)
+    if len(orig) == (len(edit) + 1):
+        return one_edit(edit, orig)
+    if len(orig) == (len(edit) - 1):
+        return one_edit(orig, edit)
     return False
 
 
