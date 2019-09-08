@@ -44,26 +44,30 @@ def rotate_matrix_copy(matrix):
 
 class TestRotateMatrix(unittest.TestCase):
     def setUp(self):
-        self.data = ([
-            [1, 2, 3, 4, 5],
-            [6, 7, 8, 9, 10],
-            [11, 12, 13, 14, 15],
-            [16, 17, 18, 19, 20],
-            [21, 22, 23, 24, 25]
-        ], [
-            [21, 16, 11, 6, 1],
-            [22, 17, 12, 7, 2],
-            [23, 18, 13, 8, 3],
-            [24, 19, 14, 9, 4],
-            [25, 20, 15, 10, 5]
-        ])
+        self.data = [
+            ([
+                [1, 2, 3, 4, 5],
+                [6, 7, 8, 9, 10],
+                [11, 12, 13, 14, 15],
+                [16, 17, 18, 19, 20],
+                [21, 22, 23, 24, 25]
+            ], [
+                [21, 16, 11, 6, 1],
+                [22, 17, 12, 7, 2],
+                [23, 18, 13, 8, 3],
+                [24, 19, 14, 9, 4],
+                [25, 20, 15, 10, 5]
+            ])
+        ]
 
     def test_rotate_matrix(self):
-        self.assertEqual(rotate_matrix(self.data[0]), self.data[1])
+        for before, after in self.data:
+            self.assertEqual(rotate_matrix(before), after)
 
     @unittest.SkipTest
     def test_rotate_matrix_copy(self):
-            self.assertEqual(rotate_matrix_copy(self.data[0]), self.data[1])
+        for before, after in self.data:
+            self.assertEqual(rotate_matrix_copy(before), after)
 
 if __name__ == '__main__':
     unittest.main()
