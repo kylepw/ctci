@@ -12,16 +12,23 @@
 import unittest
 
 
-def method():
-    pass
+def string_rotation(s1, s2):
+    """Return True if s2 is a rotation of s1"""
+    return len(s1) == len(s2) and is_substring(s2, s1*2)
 
-class TestMethod(unittest.TestCase):
-    def setUp(self):
-        self.data = ()
+def is_substring(ss, s):
+    return ss in s
+class Test(unittest.TestCase):
+    data = [
+        ('waterbottle', 'erbottlewat', True),
+        ('foo', 'bar', False),
+        ('foo', 'foofoo', False)
+    ]
 
-    def test_method(self):
-        for d in self.data:
-            pass
+    def test_string_rotation(self):
+        for [s1, s2, expected] in self.data:
+            actual = string_rotation(s1, s2)
+            self.assertEqual(actual, expected)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
