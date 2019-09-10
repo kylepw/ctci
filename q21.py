@@ -8,74 +8,49 @@
 
     Hints: #9, #40
 """
+from linkedlist import LinkedList
 
-def remove_dups(head):
+def remove_dups(ll):
     """Remove duplicate node values from linked list that starts at `head`.
 
         Runtime: O(N)
     """
-    n = head
-    vals = set()
-    vals.add(n.data)
+    n = ll.head
+    vals = set([n.value])
 
-    while (n.next):
-        if n.next.data in vals:
+    while n.next:
+        if n.next.value in vals:
             n.next = n.next.next
         else:
-            vals.add(n.next.data)
+            vals.add(n.next.value)
             n = n.next
-    print(vals)
-    return head
+    return ll.head
 
-def remove_dups_run(head):
+def remove_dups_run(ll):
     """Remove duplicate node values with running pointers.
 
         Runtime: O(N^2)
     """
-    p1 = p2 = head
-    while (p1.next):
+    p1 = p2 = ll.head
+    while p1.next:
         p1 = p1.next.next if p1.next.next else p1.next
         p2 = p2.next
     # p1 is at beginning, p2 is beginning of second half
-    p1 = head
-
-
-class Node:
-    def __init__(self, data, next=None):
-        self.data = data
-        self.next = next
-    def __repr__(self):
-        return f'Node({self.data})'
-
-def print_list(head):
-    n = head
-    while n.next:
-        print(n, '-> ', end='')
-        n = n.next
-    print(n)
-
-def init_list():
-    """Return head of linked list with values"""
-    head = Node(data=0)
-    n = head
-    for data in range(1, 5):
-        n.next = Node(data)
-        n.next.next = Node(data)
-        n = n.next.next
-    n.next = Node(data=10, next=Node(data=11))
-
-    return head
+    p1 = ll.head
 
 if __name__ == '__main__':
-    # Initialize values
-    head1 = init_list()
-    print_list(head1)
+    ll = LinkedList()
+    """
+    ll.generate(100, 0, 9)
+    print('Original: ')
+    print(ll)
+    remove_dups(ll)
     print('After duplicates removed in O(N):')
-    print_list(remove_dups(head1))
+    print(ll) """
 
-    """ head2 = init_list()
-
-    print_list(head2)
-    print('After duplicates removed in O(N^2): ')
-    remove_dups_run(head2)
-    #print_list(remove_dups_run(head2)) """
+    ll.generate(100, 0, 9)
+    print('Original: ')
+    print(ll)
+    remove_dups_run(ll)
+    print('After duplicates removed in O(N^2):')
+    print(ll)
