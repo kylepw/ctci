@@ -24,6 +24,7 @@ def remove_dups(head):
         else:
             vals.add(n.next.data)
             n = n.next
+    print(vals)
     return head
 
 def remove_dups_run(head):
@@ -37,7 +38,7 @@ def remove_dups_run(head):
         p2 = p2.next
     # p1 is at beginning, p2 is beginning of second half
     p1 = head
-    
+
 
 class Node:
     def __init__(self, data, next=None):
@@ -48,7 +49,7 @@ class Node:
 
 def print_list(head):
     n = head
-    while n.next.next:
+    while n.next:
         print(n, '-> ', end='')
         n = n.next
     print(n)
@@ -61,21 +62,20 @@ def init_list():
         n.next = Node(data)
         n.next.next = Node(data)
         n = n.next.next
-    n.next = Node(data=0)
-    n.next.next = Node(data=2)
+    n.next = Node(data=10, next=Node(data=11))
 
     return head
 
 if __name__ == '__main__':
     # Initialize values
-    """ head1 = init_list()
+    head1 = init_list()
     print_list(head1)
     print('After duplicates removed in O(N):')
-    print_list(remove_dups(head1)) """
+    print_list(remove_dups(head1))
 
-    head2 = init_list()
+    """ head2 = init_list()
 
     print_list(head2)
     print('After duplicates removed in O(N^2): ')
     remove_dups_run(head2)
-    #print_list(remove_dups_run(head2))
+    #print_list(remove_dups_run(head2)) """
