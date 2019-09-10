@@ -31,22 +31,26 @@ def remove_dups_run(ll):
 
         Runtime: O(N^2)
     """
-    p1 = p2 = ll.head
-    while p1.next:
-        p1 = p1.next.next if p1.next.next else p1.next
-        p2 = p2.next
-    # p1 is at beginning, p2 is beginning of second half
-    p1 = ll.head
+    current = ll.head
+    while current:
+        runner = current
+        while runner.next:
+            if runner.next.value == current.value:
+                runner.next = runner.next.next
+            else:
+                runner = runner.next
+        current = current.next
+
 
 if __name__ == '__main__':
     ll = LinkedList()
-    """
+
     ll.generate(100, 0, 9)
     print('Original: ')
     print(ll)
     remove_dups(ll)
     print('After duplicates removed in O(N):')
-    print(ll) """
+    print(ll)
 
     ll.generate(100, 0, 9)
     print('Original: ')
