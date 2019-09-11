@@ -13,7 +13,7 @@ def kth_to_last(ll, k):
     current = runner = ll.head
 
     # Initalize runner k nodes ahead
-    for i in range(k):
+    for _ in range(k):
         runner = runner.next
 
     while runner:
