@@ -15,18 +15,21 @@ def zero_matrix(matrix):
     N = len(matrix[0])
 
     columns = set()
+    rows = set()
     for i in range(M):
         for j in range(N):
             if matrix[i][j] == 0:
-                zero_row(matrix, row=i)
+                rows.add(i)
                 columns.add(j)
                 break
+    zero_row(matrix, rows)
     zero_columns(matrix, columns)
     return matrix
 
-def zero_row(matrix, row):
-    for j in range(len(matrix[0])):
-        matrix[row][j] = 0
+def zero_row(matrix, rows):
+    for row in rows:
+        for j in range(len(matrix[0])):
+            matrix[row][j] = 0
 
 def zero_columns(matrix, columns):
     for column in columns:

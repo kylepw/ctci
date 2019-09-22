@@ -17,7 +17,7 @@
 
     Hints: #7, #30, #71, #95, #109
 """
-from linkedlist import LinkedList
+from linkedlist import LinkedList, LinkedListNode
 
 def _sum_list(ll):
     sum = 0
@@ -65,6 +65,27 @@ def sum_lists(ll_a, ll_b):
         ll.add(carry)
     return ll
 
+def sum_lists_recursive(node_a, node_b, carry=0):
+    if not node_a and not node_b and carry == 0:
+        return None
+
+    result = LinkedListNode(0)
+    value = carry
+    if node_a:
+        value += node_a.value
+    if node_b:
+        value += node_b.value
+
+    result.value = value % 10
+
+    if node_a or node_b:
+        more = LinkedListNode(sum_lists_recursive(
+            node_a.next if node_a else None,
+            node_b.next if node_b else None,
+            1 if value >= 10 else 0
+        ))
+        result.next = more
+    return result
 
 def sum_lists_followup(ll_a, ll_b):
     ll = LinkedList()
@@ -97,14 +118,18 @@ if __name__ == '__main__':
     ll_b.generate(3, 0, 9)
     print(ll_a)
     print(ll_b)
-    print(sum_lists(ll_a, ll_b))
-    print(sum_lists_followup(ll_a, ll_b))
+    #print(sum_lists(ll_a, ll_b))
+    node = sum_lists_recursive(ll_a.head, ll_b.head)
+    while node:
+        print(node, ' -> ')
+    #print(sum_lists_followup(ll_a, ll_b))
 
     ll_a = LinkedList()
     ll_a.add_multiple([9, 7, 8])
     ll_b = LinkedList()
     ll_b.add_multiple([6, 8, 5])
-    print(ll_a)
-    print(ll_b)
-    print(sum_lists(ll_a, ll_b))
-    print(sum_lists_followup(ll_a, ll_b))
+    #print(ll_a)
+    #print(ll_b)
+    #print(sum_lists(ll_a, ll_b))
+    #print(sum_lists_recursive(ll_a.head, ll_b.head))
+    #print(sum_lists_followup(ll_a, ll_b))

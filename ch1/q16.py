@@ -31,6 +31,30 @@ def str_compress(s):
             compressed.append(c + str(n))
     return ''.join(compressed)
 
+def _count_compression(s):
+    compressed = 0
+    counter = 0
+    for i in range(len(s)):
+        counter += 1
+        if i + 1 >= len(s) or s[i] != s[i + 1]:
+            compressed += 1 + len(str(counter))
+            counter = 0
+    return compressed
+
+def str_compress_solution(s):
+    if _count_compression(s) >= len(s):
+        return s
+    compressed = []
+    counter = 0
+    for i in range(len(s)):
+        counter += 1
+        if i + 1 >= len(s) or s[i] != s[i + 1]:
+            compressed.append(s[i])
+            compressed.append(str(counter))
+            counter = 0
+    return ''.join(compressed)
+
+
 class TestStrCompress(unittest.TestCase):
     def setUp(self):
         self.data = [
@@ -40,7 +64,7 @@ class TestStrCompress(unittest.TestCase):
 
     def test_str_compress(self):
         for s, expected in self.data:
-            self.assertEqual(str_compress(s), expected)
+            self.assertEqual(str_compress_solution(s), expected)
 
 if __name__ == '__main__':
     unittest.main()
