@@ -17,11 +17,14 @@ def create_bst(array):
 
 class TestCreateBst(unittest.TestCase):
     def setUp(self):
-        self.data = ()
+        self.data = {
+            '?': [3, 5, 6, 7, 8, 23, 34, 54, 61],
+            '??': [0, 2, 5, 6, 11, 45, 101, 238],
+        }
 
     def test_create_bst(self):
-        for d in self.data:
-            pass
+        for tree, array in self.data.items():
+            self.assertEqual(create_bst(array), tree)
 
 
 if __name__ == '__main__':
